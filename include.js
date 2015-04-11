@@ -14,6 +14,8 @@ jQuery.fn.removeAttrExcept = function(attrs) {
     This file is executed inside WebKit and does
     the actual DOM manipulation.
  */
+var usefulCSS = {"color": "rgb(0, 0, 0)"};
+
 var elems = [].slice.call(document.body.getElementsByTagName("*"));
 for(var i = 0; i < elems.length; i++){
     var style = window.getComputedStyle(elems[i]);
@@ -30,4 +32,10 @@ for(var i = 0; i < elems.length; i++){
     $(elems[i]).removeAttrExcept([
         "style"
     ]);
+    var newCSS = {};
+    for(var j = 0; j <= style.length; j++){
+        if(usefulCSS[style[j]] != null && style.getPropertyValue(style[j]) != usefulCSS[style[j]]) newCSS[style[j]] = style.getPropertyValue(style[j]);
+    }
+    $(elems[i]).removeAttr("style");
+    if(Object.keys(newCSS).length > 0) $(elems[i]).css(newCSS);
 }
