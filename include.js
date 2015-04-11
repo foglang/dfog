@@ -1,3 +1,15 @@
+jQuery.fn.removeAttrExcept = function(attrs) {
+    return this.each(function() {
+        var attributes = $.map(this.attributes, function(item) {
+            return item.name;
+        });
+        var element = $(this);
+        $.each(attributes, function(i, item) {
+            if(attrs.indexOf(item) == -1)
+            element.removeAttr(item);
+        });
+    });
+};
 /*
     This file is executed inside WebKit and does
     the actual DOM manipulation.
@@ -15,4 +27,7 @@ for(var i = 0; i < elems.length; i++){
             $(elems[i]).wrap("<u></u>");
         }
     }
+    $(elems[i]).removeAttrExcept([
+        "style"
+    ]);
 }
