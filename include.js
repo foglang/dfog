@@ -1,3 +1,7 @@
+/*
+ This file is executed inside WebKit and does
+ the actual DOM manipulation.
+ */
 jQuery.fn.removeAttrExcept = function(attrs) {
     return this.each(function() {
         var attributes = $.map(this.attributes, function(item) {
@@ -11,11 +15,22 @@ jQuery.fn.removeAttrExcept = function(attrs) {
     });
 };
 /*
-    This file is executed inside WebKit and does
-    the actual DOM manipulation.
+    List of element attributes which should be
+    retained in source code.
  */
-var usefulCSS = {"color": "rgb(0, 0, 0)"};
-
+var retainedAttributes = [
+    "style"
+];
+/*
+    List of CSS properties and which should
+    be retained and their default values. If
+    a property is set to the default, it will
+    NOT be retained.
+ */
+var retainedCSS = {
+    "color": "rgb(0, 0, 0)",
+    "background-color": "rgba(0, 0, 0, 0)"
+};
 var elems = [].slice.call(document.body.getElementsByTagName("*"));
 for(var i = 0; i < elems.length; i++){
     var style = window.getComputedStyle(elems[i]);
@@ -29,12 +44,10 @@ for(var i = 0; i < elems.length; i++){
             $(elems[i]).wrap("<u></u>");
         }
     }
-    $(elems[i]).removeAttrExcept([
-        "style"
-    ]);
+    $(elems[i]).removeAttrExcept(retainedAttributes);
     var newCSS = {};
     for(var j = 0; j <= style.length; j++){
-        if(usefulCSS[style[j]] != null && style.getPropertyValue(style[j]) != usefulCSS[style[j]]) newCSS[style[j]] = style.getPropertyValue(style[j]);
+        if(retainedCSS[style[j]] != null && style.getPropertyValue(style[j]) != retainedCSS[style[j]]) newCSS[style[j]] = style.getPropertyValue(style[j]);
     }
     $(elems[i]).removeAttr("style");
     if(Object.keys(newCSS).length > 0) $(elems[i]).css(newCSS);
