@@ -10,9 +10,8 @@ p.run = function(uri, cb){
     phantom.create(function (ph) {
         ph.createPage(function (page) {
             page.open(uri, function (status) {
-                console.log("opened google? ", status);
                 cb({state: "LOADED"});
-                page.includeJs("http://code.jquery.com/jquery-2.1.3.min.js", function() {
+                page.includeJs("http://code.jquery.com/jquery-2.1.3.min.js", function() { // This should be updated to a local file to avoid need for internet
                     cb({state: "DOWNLOADED_LIBS"});
                     page.includeJs(__dirname + "/include.js", function () {
                         cb({state: "PROCESSED"});
