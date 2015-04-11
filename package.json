@@ -1,0 +1,41 @@
+{
+  "name": "dfog",
+  "version": "0.0.0",
+  "description": "Source normalization layer for the fog language",
+  "homepage": "https://github.com/foglang/dfog",
+  "author": {
+    "name": "foglang",
+    "email": "me@falkirks.com",
+    "url": "fog.falkirks.com"
+  },
+  "repository": "foglang/dfog",
+  "license": "MIT",
+  "files": [
+    "index.js",
+    "cli.js"
+  ],
+  "keywords": [
+    "dfog",
+    ""
+  ],
+  "dependencies": {
+    "meow": "^3.1.0",
+    "phantom": "^0.7.2"
+  },
+  "devDependencies": {
+    "grunt-cli": "^0.1.13",
+    "grunt-contrib-jshint": "^0.11.0",
+    "grunt-contrib-nodeunit": "^0.4.1",
+    "grunt-contrib-watch": "^0.6.1",
+    "grunt-mocha-cli": "^1.12.0",
+    "jshint-stylish": "^1.0.1",
+    "load-grunt-tasks": "^3.1.0",
+    "time-grunt": "^1.1.0"
+  },
+  "scripts": {
+    "test": "grunt"
+  },
+  "bin": {
+    "dfog": "cli.js"
+  }
+}
