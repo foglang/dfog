@@ -27,6 +27,6 @@ p.run = function(uri, cb){
                 });
             });
         });
-    });
+    }, {dnodeOpts: {weak: false}});
 };
 module.exports = dfog;
