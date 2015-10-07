@@ -17,13 +17,9 @@ cli.main(function(args, options) {
     if(args[0] != null){
         fs.exists(args[0], function(exists) {
             if (exists) {
-                cli.ok("Found input file.");
-                dfog.run(args[0], function(data){
-                    if(data.error != null) cli.error(data.state);
-                    else if(data.state == "DONE"){
-                        console.log(data.page);
-                    }
-                    else cli.ok(data.state);
+                dfog.run(args[0], function(err, res){
+                    if(err != null) cli.error(err);
+                    console.log(res);
                 });
             }
             else{
